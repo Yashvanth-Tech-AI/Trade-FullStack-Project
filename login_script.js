@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Login attempt:', loginData);
         
         // Example API call (commented out - implement according to your backend)
-        fetch('/api/login', {
+        fetch('http://192.168.1.3:5000/api/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                window.location.href = '/api/index';
+                window.location.href = data.redirect;
             } else {
                 alert(data.message || 'Login failed');
             }
