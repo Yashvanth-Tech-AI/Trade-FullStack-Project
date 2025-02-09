@@ -1,0 +1,174 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Background with lighter overlay */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('Images/login_img') center/cover no-repeat;
+    filter: brightness(0.8) contrast(0.9); /* Makes background lighter */
+    z-index: -2;
+}
+
+/* Additional overlay for better contrast */
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(103, 232, 249, 0.1));
+    backdrop-filter: blur(5px);
+    z-index: -1;
+}
+
+.login-container {
+    width: 450px;
+    background: rgba(13, 25, 48, 0.75);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.logo-section img {
+    width: 32px;
+    height: 32px;
+}
+
+.logo-section .brand {
+    color: #64ffda;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.tagline {
+    color: #a8b2d1;
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.promo-message {
+    background: rgba(100, 255, 218, 0.1);
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    color: #e6edf8;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.input-wrapper {
+    position: relative;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.input-wrapper select,
+.input-wrapper input {
+    width: 100%;
+    padding: 15px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.input-wrapper select {
+    appearance: none;
+    cursor: pointer;
+}
+
+.input-wrapper select option {
+    background: #1a2942;
+    color: #ffffff;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper .toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64ffda;
+    cursor: pointer;
+}
+
+.login-button {
+    width: 100%;
+    padding: 15px;
+    background: #64ffda;
+    border: none;
+    border-radius: 12px;
+    color: #1a2942;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 20px;
+}
+
+.login-button:hover {
+    background: #4cd7b1;
+    transform: translateY(-2px);
+}
+
+.signup-text {
+    text-align: center;
+    margin-top: 20px;
+    color: #a8b2d1;
+}
+
+.signup-text a {
+    color: #64ffda;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        width: 100%;
+        max-width: 400px;
+        padding: 30px;
+    }
+}
