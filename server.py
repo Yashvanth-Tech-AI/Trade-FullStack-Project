@@ -1,15 +1,16 @@
-from flask import Flask, jsonify, render_template, request, redirect, url_for
+from flask import Flask, jsonify, render_template, request, redirect, url_for,session
 from flask_cors import CORS
 import psycopg2
 import bcrypt
 import datetime
-
+import secrets
+import logging 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 CORS(app, resources={r"/submit_form": {"origins": "*"}})
 
 # Database connection details
-DB_HOST = "13.234.31.207"  # Change this to your PostgreSQL host
+DB_HOST = "13.233.145.144"  # Change this to your PostgreSQL host
 DB_NAME = "postgres"      # Your database name
 DB_USER = "postgres"        # Your PostgreSQL username
 DB_PASSWORD = "1117" # Your PostgreSQL password
@@ -36,18 +37,24 @@ def get_db_connection():
 def home():
     return render_template('home.html')
 
-# Login page route
-@app.route('/api/login', methods=['GET', 'POST'])
+@app.route('/api/login', methods=['POST'])
 def login():
     try:
-        data = request.get_json()  # Get JSON data instead of request.form
-        username = data.get('loginCode')  # Match frontend JSON key
+        data = request.get_json()
+        if not data:
+            return jsonify({'success': False, 'message': 'Invalid request, JSON data missing'}), 400
+
+        username = data.get('loginCode')
         password = data.get('password')
 
-        conn = get_db_connection()
-        cur = conn.cursor()
+        if not username or not password:
+            return jsonify({'success': False, 'message': 'Username and password are required'}), 400
 
-        # Fetch user details from the database
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({'success': False, 'message': 'Database connection failed'}), 500
+
+        cur = conn.cursor()
         cur.execute("SELECT username, password FROM users WHERE username = %s;", (username,))
         user = cur.fetchone()
 
@@ -55,24 +62,21 @@ def login():
         conn.close()
 
         if user:
-            stored_password = user[1]  # Password from DB (currently plaintext)
+            stored_password = user[1]  # Plaintext password from DB
             
-            # If using bcrypt (passwords must be hashed during user registration)
-            # if bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8')):
-
-            if password == stored_password:  # Plaintext password check (for now)
-                session['user'] = username  # Store session
-                return jsonify({'success': True, 'redirect': '/api/index'})
+            if password == stored_password:
+                return jsonify({'success': True, 'redirect': url_for('index')})
             else:
                 return jsonify({'success': False, 'message': 'Invalid credentials'}), 401
         else:
             return jsonify({'success': False, 'message': 'User not found'}), 404
 
     except Exception as e:
-        print("Error:", str(e))
+        print("Error in login:", str(e))  # Print error in the console
         return jsonify({'success': False, 'message': 'Internal server error'}), 500
 
-@app.route('/api/index')
+
+@app.route('/api/payouts')
 def index():
     if 'user' in session:
         return render_template('index.html', username=session['user'])
