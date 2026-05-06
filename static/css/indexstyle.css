@@ -1,0 +1,579 @@
+/* Importing Roboto Font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+/* Color Customizations */
+:root {
+  --background-color: #1f2937; /* General background */
+  --text-color: #e5e7eb; /* Text color */
+  --sidebar-background: #0e0a1f; /* Sidebar background */
+  --sidebar-item-hover-bg: #374151; /* Sidebar item hover */
+  --table-header-bg: #1f2937; /* Table header background */
+  --table-border-color: #475569; /* Table border color (for vertical and horizontal) */
+  --table-row-hover-bg: #475569; /* Hover color for table rows */
+  --table-body-bg: #2d3748; /* Table body background */
+  --card-bg-color: #788999; /* Card background */
+  --card-text-color: #030914; /* Card text color */
+  --btn-bg-color: #2563eb; /* Button background */
+  --btn-hover-bg-color: #1e40af; /* Button hover background */
+  --link-color: #60a5fa; /* Link color (e.g., in table headers) */
+  --link-hover-color: #fff; /* Link hover color */
+  --status-approved-color: #10b981; /* Approved status color */
+  --status-pending-color: #f59e0b; /* Pending status color */
+  --status-rejected-color: #ef4444; /* Rejected status color */
+}
+
+/* General Styling */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;  /* Changed font to Roboto */
+  background-color: var(--background-color);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container */
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  width: 250px;
+  background-color: var(--sidebar-background);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar .logo img {
+  max-width: 150px;
+  margin-bottom: 5px;
+}
+
+.sidebar .logo h2 {
+  font-size: 18px;
+  color: var(--link-color);
+  text-align: center;
+}
+
+.sidebar .logo p {
+  font-size: 12px;
+  color: #9ca3af;
+  text-align: center;
+}
+
+.sidebar .menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.sidebar .menu li {
+  margin: 10px 0;
+}
+
+.sidebar .menu li a {
+  text-decoration: none ;
+  color: #9ca3af;
+  font-size: 16px;
+  display: block;
+  padding: 10px 15px;
+  transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+
+/* Highlight active menu item with brighter text color */
+.sidebar .menu li a.active,
+.sidebar .menu li a:hover {
+  color: var(--link-hover-color);
+  font-weight: bold; /* Optional: to make the active menu item bold */
+}
+/* Main Content */
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Content Header */
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.content-header h1 {
+  font-size: 24px;
+  color: var(--link-color);
+}
+
+.new-payout-btn {
+  background-color: var(--btn-bg-color);
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.new-payout-btn:hover {
+  background-color: var(--btn-hover-bg-color);
+}
+
+/* Search Bar */
+.search-container {
+  margin-bottom: 20px;
+}
+
+.search-bar {
+  width: 30%;
+  padding: 10px;
+  border: 1px solid var(--table-border-color);
+  border-radius: 4px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #374151;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--table-border-color);
+}
+
+table th,
+table td {
+  padding: 10px;
+  text-align: left;
+  border-left: 1px solid var(--table-border-color);
+  border-bottom: 1px solid var(--table-border-color);
+}
+
+table th {
+  background-color: var(--table-header-bg);
+  color: #9ca3af;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: var(--table-body-bg);
+}
+
+table tbody tr:hover {
+  background-color: var(--table-row-hover-bg);
+}
+
+/* Section for Switching Tables */
+section {
+  margin-bottom: 40px;
+}
+
+/* Payout Table Section */
+#payout-section {
+  display: block;
+}
+
+/* Working Days Table Section */
+#working-days-section {
+  display: none;
+}
+
+#working-days-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #374151;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--table-border-color);
+}
+
+#working-days-table th,
+#working-days-table td {
+  padding: 10px;
+  text-align: left;
+  border-left: 1px solid var(--table-border-color);
+  border-bottom: 1px solid var(--table-border-color);
+}
+
+#working-days-table th {
+  background-color: var(--table-header-bg);
+  color: #9ca3af;
+}
+
+#working-days-table tbody tr:nth-child(even) {
+  background-color: var(--table-body-bg);
+}
+
+#working-days-table tbody tr:hover {
+  background-color: var(--table-row-hover-bg);
+}
+
+/* Holidays Table Section */
+#holidays-section {
+  display: none;
+}
+
+#holidays-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #374151;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--table-border-color);
+}
+
+#holidays-table th,
+#holidays-table td {
+  padding: 10px;
+  text-align: left;
+  border-left: 1px solid var(--table-border-color);
+  border-bottom: 1px solid var(--table-border-color);
+}
+
+#holidays-table th {
+  background-color: var(--table-header-bg);
+  color: #9ca3af;
+  font-weight: bold;
+}
+
+#holidays-table tbody tr:nth-child(even) {
+  background-color: var(--table-body-bg);
+}
+
+#holidays-table tbody tr:hover {
+  background-color: var(--table-row-hover-bg);
+}
+
+#holidays-table td {
+  color: var(--text-color);
+}
+
+/* Pay-In Section */
+#payin-section {
+  display: none;
+}
+
+#payin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #374151;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--table-border-color);
+}
+
+#payin-table th,
+#payin-table td {
+  padding: 10px;
+  text-align: left;
+  border-left: 1px solid var(--table-border-color);
+  border-bottom: 1px solid var(--table-border-color);
+}
+
+#payin-table th {
+  background-color: var(--table-header-bg);
+  color: #9ca3af;
+  font-weight: bold;
+}
+
+#payin-table tbody tr:nth-child(even) {
+  background-color: var(--table-body-bg);
+}
+
+#payin-table tbody tr:hover {
+  background-color: var(--table-row-hover-bg);
+}
+
+#payin-table td {
+  color: var(--text-color);
+}
+
+/* Payin Amount Cell Highlight */
+#payin-table td.payin-amount {
+  color: var(--link-color);
+}
+
+/* Status Cell Color Coding */
+#payin-table td.status-approved {
+  color: var(--status-approved-color);
+}
+
+#payin-table td.status-pending {
+  color: var(--status-pending-color);
+}
+
+#payin-table td.status-rejected {
+  color: var(--status-rejected-color);
+}
+
+/* Pay-In Section Header */
+#payin-section-header {
+  margin-bottom: 20px;
+}
+
+#payin-section-header h2 {
+  font-size: 20px;
+  color: var(--link-color);
+  font-weight: bold;
+}
+
+/* Pay-In Button Styles */
+.payin-action-btn {
+  background-color: var(--btn-bg-color);
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.payin-action-btn:hover {
+  background-color: var(--btn-hover-bg-color);
+}
+
+/* General Container Styling for Dashboard */
+#dashboard-summary {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+/* Container for dashboard cards */
+#dashboard-summary {
+  display: flex;
+  justify-content: space-between; /* Evenly space the cards in the row */
+  gap: 10px; /* Space between the cards */
+  flex-wrap: nowrap; /* Prevent the cards from wrapping onto the next line */
+  align-items: center;
+}
+
+/* Card Styling */
+.dashboard-card {
+  background-color: var(--card-bg-color); /* Card background */
+  color: var(--card-text-color); /* Card text color */
+  padding: 5px;
+  border-radius: 8px;
+  flex: 0 1 20%; /* Card width is around 22%, adjust as needed */
+  box-shadow: 0 4px 4px rgba(248, 246, 246, 0.919);
+  transition: transform 0.3s ease;
+  text-align:center;
+  aspect-ratio: 1.5; /* Ensure square shape */
+  box-sizing: border-box; /* Prevent any overflow from padding */
+}
+
+/* Heading Styling */
+.dashboard-card h3 {
+  font-size: 20px;
+  color: var(--link-color); /* Heading color */
+}
+
+/* Paragraph Styling */
+.dashboard-card p {
+  font-size: 20px;
+  margin-top: 10px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+/* Hover Effect */
+.dashboard-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  #dashboard-summary {
+    justify-content: center;
+  }
+
+  .dashboard-card {
+    flex: 1 1 100%; /* Make cards take full width on small screens */
+    margin-bottom: 10px;
+    aspect-ratio: 1;
+    max-width: 400px; /* Restrict max width for cards */
+  }
+}
+
+/* Consultant Section Styling */
+#consultant-section {
+  padding: 20px;
+  background-color: #b5c4d0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+#consultant-section header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#consultant-section h1 {
+  font-size: 24px;
+  color: #333;
+  font-family: 'Arial', sans-serif;
+}
+
+#consultant-section p {
+  font-size: 18px;
+  color: #555;
+  font-family: 'Arial', sans-serif;
+  margin: 10px 0;
+}
+
+#consultant-section p strong {
+  font-weight: bold;
+}
+
+/* Active Sidebar Menu Item */
+.sidebar .menu li a.active {
+  color: var(--link-hover-color);
+  font-weight: bold; /* Optional: to make the active menu item bold */
+}
+
+/* For Hiding Sections */
+#consultant-section {
+  display: none; /* Hidden by default, only shown when consultant menu is clicked */
+}
+
+.sidebar {
+  background-color: #2c3e50;
+}
+
+.sidebar .menu li a {
+  padding: 10px;
+  display: block;
+  text-decoration: none;
+  color: #ecf0f1;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar .menu li a:hover {
+  background-color: #34495e;
+}
+/* My Ledger Section Styling */
+#ledger-section {
+  padding: 20px;
+  background-color: var(--background-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ledger Section Header */
+#ledger-section .content-header h1 {
+  font-size: 24px;
+  color: var(--link-color);
+  margin-bottom: 20px;
+}
+
+/* Filters Styling */
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.filters select {
+  padding: 8px 12px;
+  border: 1px solid var(--table-border-color);
+  border-radius: 4px;
+  background-color: var(--table-body-bg);
+  color: var(--text-color);
+}
+
+.filters button {
+  padding: 8px 15px;
+  background-color: var(--btn-bg-color);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.filters button:hover {
+  background-color: var(--btn-hover-bg-color);
+}
+
+/* Summary Items Inline */
+.ledger-summary {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+.ledger-summary div {
+  background-color: var(--card-bg-color);
+  color: var(--card-text-color);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+}
+
+/* Ledger Table Styling */
+#ledger-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #374151;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--table-border-color);
+}
+
+#ledger-table th,
+#ledger-table td {
+  padding: 10px;
+  text-align: left;
+  border-left: 1px solid var(--table-border-color);
+  border-bottom: 1px solid var(--table-border-color);
+}
+
+#ledger-table th {
+  background-color: var(--table-header-bg);
+  color: #9ca3af;
+  font-weight: bold;
+}
+
+#ledger-table tbody tr:nth-child(even) {
+  background-color: var(--table-body-bg);
+}
+
+#ledger-table tbody tr:hover {
+  background-color: var(--table-row-hover-bg);
+}
+
+#ledger-table td {
+  color: var(--text-color);
+  font-size: 14px;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .filters {
+    flex-wrap: wrap;
+  }
+
+  .ledger-summary {
+    justify-content: center;
+  }
+
+  #ledger-table {
+    font-size: 12px;
+  }
+}

@@ -5,16 +5,24 @@ import bcrypt
 import datetime
 import secrets
 import logging 
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+
 app = Flask(__name__)
+app.secret_key = os.getenv("FLASK_SECRET_KEY", "default-secret-key")
+
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 CORS(app, resources={r"/submit_form": {"origins": "*"}})
 
 # Database connection details
-DB_HOST = "13.233.145.144"  # Change this to your PostgreSQL host
-DB_NAME = "postgres"      # Your database name
-DB_USER = "postgres"        # Your PostgreSQL username
-DB_PASSWORD = "1117" # Your PostgreSQL password
-DB_PORT = "5432"            # Default PostgreSQL port
+DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_NAME = os.getenv("DB_NAME", "postgres")
+DB_USER = os.getenv("DB_USER", "postgres")
+DB_PASSWORD = os.getenv("DB_PASSWORD", "")
+DB_PORT = os.getenv("DB_PORT", "5432")
 
 def get_db_connection():
     try:
@@ -32,10 +40,14 @@ def get_db_connection():
         print(e)
         return None
 
-# Home page route (this is where the login button will be)
+# Home page route
 @app.route('/api')
 def home():
-    return render_template('home.html')
+    return render_template('Home.html')
+
+@app.route('/api/login', methods=['GET'])
+def login_page():
+    return render_template('login.html')
 
 @app.route('/api/login', methods=['POST'])
 def login():
