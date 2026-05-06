@@ -86,4 +86,4 @@ Trade-FullStack-Project/
 Never commit your `.env` file to GitHub. The `.gitignore` file included in this repo ensures it stays local. Always use `.env.example` as a reference for others.
 
 ---
-*Created with ❤️ for a professional developer experience.*
+**⭐ Contributions, issues, and feature requests are welcome!**
